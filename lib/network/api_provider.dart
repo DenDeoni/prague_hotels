@@ -43,7 +43,7 @@ class ApiProvider {
         }),
       );
       if (response.statusCode == 200) {
-        var data = jsonDecode(response.body);
+        var data = json.decode(utf8.decode(response.bodyBytes));
         return data;
       } else {
         print('ERROR');
