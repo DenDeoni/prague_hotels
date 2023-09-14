@@ -12,21 +12,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:prague_hotels/utils/constants.dart';
 
 class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
-  int guests = 1;
+  late int guests = 1;
   late CheckDateModel checkInDate =
       CheckDateModel(day: DateTime.now().day, month: DateTime.now().month, year: DateTime.now().year);
   late CheckDateModel checkOutDate =
       CheckDateModel(day: DateTime.now().day + 3, month: DateTime.now().month, year: DateTime.now().year);
   String sort = priceLowToHigh;
-  late int maxPrice = 300;
-  late int minPrice = 100;
-
-  String _getCurrentDate() {
-    DateTime now = DateTime.now();
-    var formatter = DateFormat('yyyy-MM-dd');
-    String formattedDate = formatter.format(now);
-    return formattedDate;
-  }
+  late int maxPrice;
+  late int minPrice;
 
   Future<List<PropertyModel>> _getHotelList() async {
     Map<String, dynamic> response = await ApiProvider().request(
@@ -39,6 +32,7 @@ class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
         filters: PriceQueryModel(price: PriceModel(max: maxPrice, min: minPrice)),
       ),
     );
+    print('RESPONSE: $response');
     List<PropertyModel> listProp = PropertyListModel.fromJson(response['data']['propertySearch']).properties;
     return listProp;
   }

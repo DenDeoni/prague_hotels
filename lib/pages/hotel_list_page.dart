@@ -26,7 +26,7 @@ class HotelListPage extends StatelessWidget {
                 slivers: <Widget>[
                   SliverAppBar(
                     floating: true,
-                    collapsedHeight: 400,
+                    collapsedHeight: 370,
                     expandedHeight: 200,
                    // stretch: true,
                     backgroundColor: Colors.yellow[50],
@@ -62,7 +62,7 @@ class HotelListPage extends StatelessWidget {
                             // MIN PRICE FIELD
                             StatefulBuilder(builder: (context, setState) {
                               return TextFormField(
-                                initialValue: '0',
+                                initialValue: '100',
                                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 decoration: InputDecoration(
                                   labelText: minPrice,
@@ -74,7 +74,7 @@ class HotelListPage extends StatelessWidget {
                                   ),
                                 ),
                                 onSaved: (value) {
-                                  hotelListBloc.minPrice = int.parse(value ?? '0');
+                                  hotelListBloc.minPrice = int.parse(value ?? '100');
                                 },
                               );
                             }),
@@ -82,7 +82,7 @@ class HotelListPage extends StatelessWidget {
                             // MAX PRICE FIELD
                             StatefulBuilder(builder: (context, setState) {
                               return TextFormField(
-                                initialValue: '3000',
+                                initialValue: '300',
                                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 decoration: InputDecoration(
                                   labelText: maxPrice,
@@ -94,7 +94,7 @@ class HotelListPage extends StatelessWidget {
                                   ),
                                 ),
                                 onSaved: (value) {
-                                  hotelListBloc.maxPrice = int.parse(value ?? '3000');
+                                  hotelListBloc.maxPrice = int.parse(value ?? '300');
                                 },
                               );
                             }),
