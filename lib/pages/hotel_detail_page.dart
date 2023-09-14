@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:prague_hotels/models/hotel_detail_model.dart';
+import 'package:prague_hotels/models/index.dart';
 
 class HotelDetailPage extends StatelessWidget {
-  final HotelDetailModel content;
+  final PropertyModel content;
+
   const HotelDetailPage({required this.content, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(content.name);
+    return Scaffold(
+      body: Center(child: Text(content.name ?? 'Name of Hotel')),
+    );
   }
 }
