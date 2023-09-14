@@ -7,76 +7,69 @@ import 'index.dart';
 class QueryParamsModel {
 
   const QueryParamsModel({
-    required this.regionId,
+    required this.destination,
     required this.checkInDate,
     required this.checkOutDate,
-    required this.guests,
-    required this.resultsStartingIndex,
+    required this.rooms,
     required this.sort,
-    required this.price,
+    required this.filters,
   });
 
-  final String regionId;
-  final String checkInDate;
-  final String checkOutDate;
-  final int guests;
-  final int resultsStartingIndex;
+  final DestinationModel destination;
+  final CheckDateModel checkInDate;
+  final CheckDateModel checkOutDate;
+  final List<RoomsModel> rooms;
   final String sort;
-  final PriceModel price;
+  final PriceQueryModel filters;
 
   factory QueryParamsModel.fromJson(Map<String,dynamic> json) => QueryParamsModel(
-    regionId: json['regionId'].toString(),
-    checkInDate: json['checkInDate'].toString(),
-    checkOutDate: json['checkOutDate'].toString(),
-    guests: json['guests'] as int,
-    resultsStartingIndex: json['resultsStartingIndex'] as int,
+    destination: DestinationModel.fromJson(json['destination'] as Map<String, dynamic>),
+    checkInDate: CheckDateModel.fromJson(json['checkInDate'] as Map<String, dynamic>),
+    checkOutDate: CheckDateModel.fromJson(json['checkOutDate'] as Map<String, dynamic>),
+    rooms: (json['rooms'] as List? ?? []).map((e) => RoomsModel.fromJson(e as Map<String, dynamic>)).toList(),
     sort: json['sort'].toString(),
-    price: PriceModel.fromJson(json['price'] as Map<String, dynamic>)
+    filters: PriceQueryModel.fromJson(json['filters'] as Map<String, dynamic>)
   );
   
   Map<String, dynamic> toJson() => {
-    'regionId': regionId,
-    'checkInDate': checkInDate,
-    'checkOutDate': checkOutDate,
-    'guests': guests,
-    'resultsStartingIndex': resultsStartingIndex,
+    'destination': destination.toJson(),
+    'checkInDate': checkInDate.toJson(),
+    'checkOutDate': checkOutDate.toJson(),
+    'rooms': rooms.map((e) => e.toJson()).toList(),
     'sort': sort,
-    'price': price.toJson()
+    'filters': filters.toJson()
   };
 
   QueryParamsModel clone() => QueryParamsModel(
-    regionId: regionId,
-    checkInDate: checkInDate,
-    checkOutDate: checkOutDate,
-    guests: guests,
-    resultsStartingIndex: resultsStartingIndex,
+    destination: destination.clone(),
+    checkInDate: checkInDate.clone(),
+    checkOutDate: checkOutDate.clone(),
+    rooms: rooms.map((e) => e.clone()).toList(),
     sort: sort,
-    price: price.clone()
+    filters: filters.clone()
   );
 
 
   QueryParamsModel copyWith({
-    String? regionId,
-    String? checkInDate,
-    String? checkOutDate,
-    int? guests,
-    int? resultsStartingIndex,
+    DestinationModel? destination,
+    CheckDateModel? checkInDate,
+    CheckDateModel? checkOutDate,
+    List<RoomsModel>? rooms,
     String? sort,
-    PriceModel? price
+    PriceQueryModel? filters
   }) => QueryParamsModel(
-    regionId: regionId ?? this.regionId,
+    destination: destination ?? this.destination,
     checkInDate: checkInDate ?? this.checkInDate,
     checkOutDate: checkOutDate ?? this.checkOutDate,
-    guests: guests ?? this.guests,
-    resultsStartingIndex: resultsStartingIndex ?? this.resultsStartingIndex,
+    rooms: rooms ?? this.rooms,
     sort: sort ?? this.sort,
-    price: price ?? this.price,
+    filters: filters ?? this.filters,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is QueryParamsModel && regionId == other.regionId && checkInDate == other.checkInDate && checkOutDate == other.checkOutDate && guests == other.guests && resultsStartingIndex == other.resultsStartingIndex && sort == other.sort && price == other.price;
+    || other is QueryParamsModel && destination == other.destination && checkInDate == other.checkInDate && checkOutDate == other.checkOutDate && rooms == other.rooms && sort == other.sort && filters == other.filters;
 
   @override
-  int get hashCode => regionId.hashCode ^ checkInDate.hashCode ^ checkOutDate.hashCode ^ guests.hashCode ^ resultsStartingIndex.hashCode ^ sort.hashCode ^ price.hashCode;
+  int get hashCode => destination.hashCode ^ checkInDate.hashCode ^ checkOutDate.hashCode ^ rooms.hashCode ^ sort.hashCode ^ filters.hashCode;
 }

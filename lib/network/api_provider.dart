@@ -14,33 +14,20 @@ class ApiProvider {
           'X-RapidAPI-Key': '1578822c28msh62e31662f29da8bp112d80jsnc4f654861ef2',
           'X-RapidAPI-Host': 'hotels4.p.rapidapi.com',
         },
-        body: jsonEncode({
-          "destination": {
-            "regionId": "2872"
-          },
-          "checkInDate": {
-            "day": 10,
-            "month": 10,
-            "year": 2022
-          },
-          "checkOutDate": {
-            "day": 15,
-            "month": 10,
-            "year": 2022
-          },
-          "rooms": [
-            {
-              "adults": 2
+        body: jsonEncode(
+          {
+            "destination": {"regionId": "2872"},
+            "checkInDate": {"day": 10, "month": 10, "year": 2022},
+            "checkOutDate": {"day": 15, "month": 10, "year": 2022},
+            "rooms": [
+              {"adults": 2}
+            ],
+            "sort": "PRICE_LOW_TO_HIGH",
+            "filters": {
+              "price": {"max": 3000, "min": 100}
             }
-          ],
-          "sort": "PRICE_LOW_TO_HIGH",
-          "filters": {
-            "price": {
-              "max": 150,
-              "min": 100
-            }
-          }
-        }),
+          },
+        ),
       );
       if (response.statusCode == 200) {
         var data = json.decode(utf8.decode(response.bodyBytes));

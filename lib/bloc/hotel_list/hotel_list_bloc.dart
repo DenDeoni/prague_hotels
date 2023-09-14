@@ -13,11 +13,13 @@ import 'package:prague_hotels/utils/constants.dart';
 
 class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
   int guests = 1;
-  late String checkInDate = _getCurrentDate();
-  String checkOutDate = '';
+  late CheckDateModel checkInDate =
+      CheckDateModel(day: DateTime.now().day, month: DateTime.now().month, year: DateTime.now().year);
+  late CheckDateModel checkOutDate =
+      CheckDateModel(day: DateTime.now().day + 3, month: DateTime.now().month, year: DateTime.now().year);
   String sort = priceLowToHigh;
-  int maxPrice = 0;
-  int minPrice = 0;
+  late int maxPrice = 300;
+  late int minPrice = 100;
 
   String _getCurrentDate() {
     DateTime now = DateTime.now();
@@ -29,13 +31,12 @@ class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
   Future<List<PropertyModel>> _getHotelList() async {
     Map<String, dynamic> response = await ApiProvider().request(
       queryParams: QueryParamsModel(
-        regionId: "2872",
+        destination: const DestinationModel(regionId: '2872'),
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        guests: guests,
-        resultsStartingIndex: 0,
+        rooms: [RoomsModel(adults: guests)],
         sort: sort,
-        price: PriceModel(max: maxPrice, min: minPrice),
+        filters: PriceQueryModel(price: PriceModel(max: maxPrice, min: minPrice)),
       ),
     );
     List<PropertyModel> listProp = PropertyListModel.fromJson(response['data']['propertySearch']).properties;
