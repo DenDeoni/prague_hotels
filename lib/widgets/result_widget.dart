@@ -19,6 +19,7 @@ class ResultWidget extends StatelessWidget {
                 content: state.hotelList[index],
               );
             },
+            childCount: state.hotelList.length,
           ),
         ),
       HotelListErrorState() => SliverToBoxAdapter(child: TextMessageWidget(textMessage: state.errorMessage)),
