@@ -12,12 +12,11 @@ class Routing {
 
   Routing._internal();
 
-  void navigateToHotelDetail(BuildContext context, PropertyModel content) {
+  void navigateToHotelDetail(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => HotelDetailPage(
-            content: content,
+          builder: (context) => const HotelDetailPage(
           )),
     );
   }

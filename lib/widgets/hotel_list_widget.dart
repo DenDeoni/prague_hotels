@@ -3,10 +3,10 @@ import 'package:prague_hotels/widgets/text_message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:prague_hotels/bloc/hotel_list/hotel_list_state.dart';
 
-class ResultWidget extends StatelessWidget {
+class HotelListWidget extends StatelessWidget {
   final HotelListState state;
 
-  const ResultWidget({super.key, required this.state});
+  const HotelListWidget({required this.state, super.key});
 
   Widget _resultWidget(HotelListState state) {
     final Widget widget = switch (state) {

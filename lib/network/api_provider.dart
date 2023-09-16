@@ -5,16 +5,17 @@ import 'package:prague_hotels/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
-  Future<Map<String, dynamic>> request({required QueryParamsModel queryParams}) async {
+  Future<Map<String, dynamic>> request({required Map<String, dynamic> queryParams, required endPoint}) async {
     try {
       final response = await http.post(
-        Uri.parse(listEndPoint),
+        Uri.parse(endPoint),
         headers: {
+          'content-type': 'application/json',
           'X-RapidAPI-Key': '1578822c28msh62e31662f29da8bp112d80jsnc4f654861ef2',
           'X-RapidAPI-Host': 'hotels4.p.rapidapi.com',
         },
         body:
-        jsonEncode(queryParams.toJson()),
+        jsonEncode(queryParams),
       );
       if (response.statusCode == 200) {
         var data = json.decode(utf8.decode(response.bodyBytes));

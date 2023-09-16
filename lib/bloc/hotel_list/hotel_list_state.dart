@@ -1,5 +1,6 @@
-import 'package:prague_hotels/models/hotel_list_item_model.dart';
-import 'package:prague_hotels/models/index.dart';
+
+
+import 'package:prague_hotels/models/property_model.dart';
 
 sealed class HotelListState {}
 

@@ -5,7 +5,7 @@ import 'package:prague_hotels/bloc/hotel_list/hotel_list_event.dart';
 import 'package:prague_hotels/bloc/hotel_list/hotel_list_state.dart';
 import 'package:prague_hotels/utils/constants.dart';
 import 'package:prague_hotels/widgets/divider_widget.dart';
-import 'package:prague_hotels/widgets/result_widget.dart';
+import 'package:prague_hotels/widgets/hotel_list_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HotelListPage extends StatelessWidget {
@@ -119,7 +119,7 @@ class HotelListPage extends StatelessWidget {
                     ),
                   ),
                   // RESULT WIDGET
-                  ResultWidget(state: state,),
+                  HotelListWidget(state: state,),
                 ],
               ),
             );
