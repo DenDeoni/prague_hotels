@@ -15,9 +15,7 @@ class Routing {
   void navigateToHotelDetail(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => const HotelDetailPage(
-          )),
+      MaterialPageRoute(builder: (context) => const HotelDetailPage()),
     );
   }
 }

@@ -11,27 +11,21 @@ class HotelDetailBloc extends Bloc<HotelDetailEvent, HotelDetailState> {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   HotelDetailBloc() : super(HotelDetailLoadingState()) {
-    print('INIT STATE');
     on<HotelDetailLoadEvent>(_onLoaded);
+    add(HotelDetailLoadEvent());
   }
 
   void _onLoaded(event, emit) async {
-    emit(HotelDetailLoadingState());
-    print('LOADING DETAILS');
     DetailDataModel data = await _getDetail();
-    print('INFO: ${data.propertyContentSectionGroups.aboutThisProperty.sections[0].bodySubSections?[0]
-        .elements?[0].header?.text}');
     emit(HotelDetailLoadedState(hotelDetail: data));
   }
 
   Future<DetailDataModel> _getDetail() async {
-    print('GET DETAILS');
     final SharedPreferences prefs = await _prefs;
     Map<String, dynamic> response = await ApiProvider().request(
-      queryParams: {"propertyId": prefs.getString(hotelId)},
+      queryParams: {hotelId: prefs.getString(hotelId)},
       endPoint: detailEndPoint,
     );
-    //log('DETAIL: ${response['data']['propertyInfo']}');
     final detail = DetailDataModel.fromJson(response['data']['propertyInfo']);
     return detail;
   }

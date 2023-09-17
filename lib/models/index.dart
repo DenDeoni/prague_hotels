@@ -18,6 +18,7 @@ export 'hotel_list_item_model.dart';
 export 'image_hotel_model.dart';
 export 'line_item_model.dart';
 export 'neighborhood_model.dart';
+export 'params_model.dart';
 export 'price_hotel_model.dart';
 export 'price_model.dart';
 export 'price_query_model.dart';

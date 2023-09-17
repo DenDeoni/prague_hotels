@@ -7,42 +7,6 @@ import 'index.dart';
 class DetailImageModel {
 
   const DetailImageModel({
-    this.image,
-  });
-
-  final Image? image;
-
-  factory DetailImageModel.fromJson(Map<String,dynamic> json) => DetailImageModel(
-    image: json['image'] != null ? Image.fromJson(json['image'] as Map<String, dynamic>) : null
-  );
-  
-  Map<String, dynamic> toJson() => {
-    'image': image?.toJson()
-  };
-
-  DetailImageModel clone() => DetailImageModel(
-    image: image?.clone()
-  );
-
-
-  DetailImageModel copyWith({
-    Optional<Image?>? image
-  }) => DetailImageModel(
-    image: checkOptional(image, () => this.image),
-  );
-
-  @override
-  bool operator ==(Object other) => identical(this, other)
-    || other is DetailImageModel && image == other.image;
-
-  @override
-  int get hashCode => image.hashCode;
-}
-
-@immutable
-class Image {
-
-  const Image({
     required this.url,
     required this.description,
   });
@@ -50,7 +14,7 @@ class Image {
   final String url;
   final String description;
 
-  factory Image.fromJson(Map<String,dynamic> json) => Image(
+  factory DetailImageModel.fromJson(Map<String,dynamic> json) => DetailImageModel(
     url: json['url'].toString(),
     description: json['description'].toString()
   );
@@ -60,23 +24,23 @@ class Image {
     'description': description
   };
 
-  Image clone() => Image(
+  DetailImageModel clone() => DetailImageModel(
     url: url,
     description: description
   );
 
 
-  Image copyWith({
+  DetailImageModel copyWith({
     String? url,
     String? description
-  }) => Image(
+  }) => DetailImageModel(
     url: url ?? this.url,
     description: description ?? this.description,
   );
 
   @override
   bool operator ==(Object other) => identical(this, other)
-    || other is Image && url == other.url && description == other.description;
+    || other is DetailImageModel && url == other.url && description == other.description;
 
   @override
   int get hashCode => url.hashCode ^ description.hashCode;

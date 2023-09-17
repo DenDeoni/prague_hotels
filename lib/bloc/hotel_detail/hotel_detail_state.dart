@@ -1,4 +1,3 @@
-
 import 'package:prague_hotels/models/detail_data_model.dart';
 
 sealed class HotelDetailState {}

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prague_hotels/bloc/hotel_list/hotel_list_bloc.dart';
+import 'package:prague_hotels/pages/hotel_detail_page.dart';
 import 'package:prague_hotels/pages/hotel_list_page.dart';
 import 'package:prague_hotels/utils/constants.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/hotel_detail/hotel_detail_bloc.dart';
-
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -16,24 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        BlocProvider<HotelListBloc>(
-          create: (context) => HotelListBloc(),
-        ),
-        BlocProvider<HotelDetailBloc>(
-          create: (context) => HotelDetailBloc(),
-        ),
-      ],
-      child: MaterialApp(
-        title: titleApp,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const MyHomePage(),
+    return MaterialApp(
+      title: titleApp,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: const MyHomePage(),
     );
   }
 }
@@ -47,14 +34,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  final List<Widget> _pagesWidget = <Widget>[
-    HotelListPage(),
-    const Text(
-      'Index 1: Detail',
-    ),
-  ];
+  late bool isSomeHotelViewed = false;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
+    final SharedPreferences prefs = await _prefs;
+    isSomeHotelViewed = prefs.containsKey(hotelId);
     setState(() {
       _selectedIndex = index;
     });
@@ -62,6 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pagesWidget = <Widget>[
+      HotelListPage(),
+      isSomeHotelViewed == true ? const HotelDetailPage() : const Text(noHotelViewed),
+    ];
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -72,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.pink,
       ),
       body: Center(
-        child: _pagesWidget.elementAt(_selectedIndex),
+        child: pagesWidget.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
