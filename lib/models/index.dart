@@ -1,4 +1,5 @@
 export 'about_property_model.dart';
+export 'answer_model.dart';
 export 'body_subsections_model.dart';
 export 'check_date_model.dart';
 export 'currency_info_model.dart';
@@ -27,6 +28,7 @@ export 'property_gallery_model.dart';
 export 'property_image_model.dart';
 export 'property_list_model.dart';
 export 'property_model.dart';
+export 'property_search_model.dart';
 export 'query_params_model.dart';
 export 'rooms_model.dart';
 import 'package:quiver/core.dart';

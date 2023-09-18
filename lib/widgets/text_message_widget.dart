@@ -7,6 +7,9 @@ class TextMessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(textMessage);
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Text(textMessage),
+    );
   }
 }

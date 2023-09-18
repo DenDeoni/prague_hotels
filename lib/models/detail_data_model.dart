@@ -7,35 +7,35 @@ import 'index.dart';
 class DetailDataModel {
 
   const DetailDataModel({
-    required this.propertyGallery,
-    required this.propertyContentSectionGroups,
+    this.propertyGallery,
+    this.propertyContentSectionGroups,
   });
 
-  final PropertyGalleryModel propertyGallery;
-  final PropertyContentSectionGroupsModel propertyContentSectionGroups;
+  final PropertyGalleryModel? propertyGallery;
+  final PropertyContentSectionGroupsModel? propertyContentSectionGroups;
 
   factory DetailDataModel.fromJson(Map<String,dynamic> json) => DetailDataModel(
-    propertyGallery: PropertyGalleryModel.fromJson(json['propertyGallery'] as Map<String, dynamic>),
-    propertyContentSectionGroups: PropertyContentSectionGroupsModel.fromJson(json['propertyContentSectionGroups'] as Map<String, dynamic>)
+    propertyGallery: json['propertyGallery'] != null ? PropertyGalleryModel.fromJson(json['propertyGallery'] as Map<String, dynamic>) : null,
+    propertyContentSectionGroups: json['propertyContentSectionGroups'] != null ? PropertyContentSectionGroupsModel.fromJson(json['propertyContentSectionGroups'] as Map<String, dynamic>) : null
   );
   
   Map<String, dynamic> toJson() => {
-    'propertyGallery': propertyGallery.toJson(),
-    'propertyContentSectionGroups': propertyContentSectionGroups.toJson()
+    'propertyGallery': propertyGallery?.toJson(),
+    'propertyContentSectionGroups': propertyContentSectionGroups?.toJson()
   };
 
   DetailDataModel clone() => DetailDataModel(
-    propertyGallery: propertyGallery.clone(),
-    propertyContentSectionGroups: propertyContentSectionGroups.clone()
+    propertyGallery: propertyGallery?.clone(),
+    propertyContentSectionGroups: propertyContentSectionGroups?.clone()
   );
 
 
   DetailDataModel copyWith({
-    PropertyGalleryModel? propertyGallery,
-    PropertyContentSectionGroupsModel? propertyContentSectionGroups
+    Optional<PropertyGalleryModel?>? propertyGallery,
+    Optional<PropertyContentSectionGroupsModel?>? propertyContentSectionGroups
   }) => DetailDataModel(
-    propertyGallery: propertyGallery ?? this.propertyGallery,
-    propertyContentSectionGroups: propertyContentSectionGroups ?? this.propertyContentSectionGroups,
+    propertyGallery: checkOptional(propertyGallery, () => this.propertyGallery),
+    propertyContentSectionGroups: checkOptional(propertyContentSectionGroups, () => this.propertyContentSectionGroups),
   );
 
   @override

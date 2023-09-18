@@ -16,10 +16,10 @@ class HotelListWidget extends StatelessWidget {
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return HotelListItem(
-                content: state.hotelList[index],
+                content: state.hotelList?[index],
               );
             },
-            childCount: state.hotelList.length,
+            childCount: state.hotelList?.length,
           ),
         ),
       HotelListErrorState() => SliverToBoxAdapter(child: TextMessageWidget(textMessage: state.errorMessage)),

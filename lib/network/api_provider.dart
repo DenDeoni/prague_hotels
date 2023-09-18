@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 
 class ApiProvider {
   Future<Map<String, dynamic>> request({required Map<String, dynamic> queryParams, required endPoint}) async {
-    print('PARAMS: $queryParams');
     try {
       final response = await http.post(
         Uri.parse(endPoint),
@@ -15,19 +14,15 @@ class ApiProvider {
         },
         body: jsonEncode(queryParams),
       );
-      print('RESPONSE: ${response.body}');
       if (response.statusCode == 200) {
         var data = json.decode(utf8.decode(response.bodyBytes));
         return data;
       } else {
-        return _dataError(statusCode: response.statusCode);
+        var data = json.decode(utf8.decode(response.bodyBytes));
+        return data;
       }
     } catch (e) {
-      throw Exception(e);
+      throw Exception('EXCEPTION: $e');
     }
-  }
-
-  Map<String, dynamic> _dataError({required int statusCode}) {
-    return {'status': statusCode};
   }
 }

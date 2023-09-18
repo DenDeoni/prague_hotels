@@ -37,7 +37,7 @@ class HotelDetailWidget extends StatelessWidget {
             : null,
         automaticallyImplyLeading: false,
         title: Text(
-          state.hotelDetail.propertyContentSectionGroups.aboutThisProperty.sections[0].bodySubSections?[0].elements?[0]
+          state.hotelDetail.propertyContentSectionGroups?.aboutThisProperty.sections[0].bodySubSections?[0].elements?[0]
                   .header?.text ??
               'No Name',
           style: const TextStyle(color: Colors.white),
@@ -57,10 +57,10 @@ class HotelDetailWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              content.hotelDetail.propertyGallery.images?[0].image != null
+              content.hotelDetail.propertyGallery?.images?[0].image != null
                   ? Image(
                       image:
-                          CachedNetworkImageProvider(content.hotelDetail.propertyGallery.images?[0].image?.url ?? ''),
+                          CachedNetworkImageProvider(content.hotelDetail.propertyGallery?.images?[0].image?.url ?? ''),
                       fit: BoxFit.fitWidth,
                     )
                   : const Center(
@@ -72,7 +72,7 @@ class HotelDetailWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  content.hotelDetail.propertyContentSectionGroups.aboutThisProperty.sections[0].bodySubSections?[0]
+                  content.hotelDetail.propertyContentSectionGroups?.aboutThisProperty.sections[0].bodySubSections?[0]
                           .elements?[0].items?[0].content?.text ??
                       noHotelDescription,
                   textAlign: TextAlign.justify,

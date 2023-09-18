@@ -8,8 +8,8 @@ import 'package:prague_hotels/utils/constants.dart';
 import 'hotel_detail_state.dart';
 
 class HotelDetailBloc extends Bloc<HotelDetailEvent, HotelDetailState> {
-
   final box = GetStorage();
+
   HotelDetailBloc() : super(HotelDetailLoadingState()) {
     on<HotelDetailLoadEvent>(_onLoaded);
     add(HotelDetailLoadEvent());

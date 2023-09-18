@@ -25,11 +25,15 @@ class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
   void _onLoaded(event, emit) async {
     _saveParamsToPrefs();
     emit(HotelListLoadingState());
-    List<PropertyModel> data = await _getHotelList();
-    emit(HotelListLoadedState(hotelList: data));
+    try {
+      List<PropertyModel>? data = await _getHotelList();
+      emit(HotelListLoadedState(hotelList: data));
+    } catch (e) {
+      emit(HotelListErrorState(errorMessage: '$e'));
+    }
   }
 
-  Future<List<PropertyModel>> _getHotelList() async {
+  Future<List<PropertyModel>?> _getHotelList() async {
     Map<String, dynamic> response = await ApiProvider().request(
       queryParams: QueryParamsModel(
         destination: const DestinationModel(regionId: regionId),
@@ -41,7 +45,13 @@ class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
       ).toJson(),
       endPoint: listEndPoint,
     );
-    List<PropertyModel> listProp = PropertyListModel.fromJson(response['data']['propertySearch']).properties;
+    PropertySearchModel? answer = AnswerModel.fromJson(response).data;
+    String? message = AnswerModel.fromJson(response).message;
+    if (answer == null && message != null) {
+      throw Exception('EXCEPTION: $message');
+    }
+
+    List<PropertyModel>? listProp = PropertyListModel.fromJson(response['data']['propertySearch']).properties;
     return listProp;
   }
 

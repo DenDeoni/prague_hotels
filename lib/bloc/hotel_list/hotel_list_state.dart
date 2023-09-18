@@ -14,7 +14,7 @@ final class PrefsLoadedState extends HotelListState {
 final class HotelListLoadingState extends HotelListState {}
 
 final class HotelListLoadedState extends HotelListState {
-  final List<PropertyModel> hotelList;
+  final List<PropertyModel>? hotelList;
 
   HotelListLoadedState({required this.hotelList});
 }
