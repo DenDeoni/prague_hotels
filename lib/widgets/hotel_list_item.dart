@@ -1,22 +1,22 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:prague_hotels/@core/routing.dart';
 import 'package:prague_hotels/bloc/hotel_detail/hotel_detail_bloc.dart';
 import 'package:prague_hotels/bloc/hotel_detail/hotel_detail_event.dart';
 import 'package:prague_hotels/models/property_model.dart';
 import 'package:prague_hotels/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HotelListItem extends StatelessWidget {
   final PropertyModel content;
 
+  final box = GetStorage();
+
   HotelListItem({required this.content, Key? key}) : super(key: key);
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future _saveIdToPrefs() async {
-    final SharedPreferences prefs = await _prefs;
-    prefs.setString(hotelId, content.id!);
+    box.write(hotelId, content.id!);
   }
 
   @override

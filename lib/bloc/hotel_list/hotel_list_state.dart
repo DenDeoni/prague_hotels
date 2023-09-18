@@ -1,8 +1,15 @@
+import 'package:prague_hotels/models/params_model.dart';
 import 'package:prague_hotels/models/property_model.dart';
 
 sealed class HotelListState {}
 
 final class HotelListInitState extends HotelListState {}
+
+final class PrefsLoadedState extends HotelListState {
+  final ParamsModel preferences;
+
+  PrefsLoadedState({required this.preferences});
+}
 
 final class HotelListLoadingState extends HotelListState {}
 

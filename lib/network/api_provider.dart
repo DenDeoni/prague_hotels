@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 class ApiProvider {
   Future<Map<String, dynamic>> request({required Map<String, dynamic> queryParams, required endPoint}) async {
+    print('PARAMS: $queryParams');
     try {
       final response = await http.post(
         Uri.parse(endPoint),
@@ -14,6 +15,7 @@ class ApiProvider {
         },
         body: jsonEncode(queryParams),
       );
+      print('RESPONSE: ${response.body}');
       if (response.statusCode == 200) {
         var data = json.decode(utf8.decode(response.bodyBytes));
         return data;

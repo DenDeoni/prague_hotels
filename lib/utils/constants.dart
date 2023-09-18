@@ -1,6 +1,7 @@
 const String titleApp = 'Prague Hotels';
 const String hotels = 'Hotels';
 const String lastViewed = 'Last viewed';
+const String regionId = '2872';
 const String listEndPoint = 'https://hotels4.p.rapidapi.com/properties/v2/list';
 const String detailEndPoint = 'https://hotels4.p.rapidapi.com/properties/v2/detail';
 const String apiKey = '4f709906famsh7f905c81e34318fp1f6d07jsna7d7c818489e';

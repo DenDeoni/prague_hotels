@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:prague_hotels/pages/hotel_detail_page.dart';
 import 'package:prague_hotels/pages/hotel_list_page.dart';
 import 'package:prague_hotels/utils/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -35,11 +36,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   late bool isSomeHotelViewed = false;
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  final box = GetStorage();
 
   void _onItemTapped(int index) async {
-    final SharedPreferences prefs = await _prefs;
-    isSomeHotelViewed = prefs.containsKey(hotelId);
+    isSomeHotelViewed = box.hasData(hotelId);
     setState(() {
       _selectedIndex = index;
     });

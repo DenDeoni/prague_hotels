@@ -10,7 +10,7 @@ class HotelListWidget extends StatelessWidget {
 
   Widget _resultWidget(HotelListState state) {
     final Widget widget = switch (state) {
-      HotelListInitState() => const SliverToBoxAdapter(child: SizedBox.shrink()),
+      HotelListInitState() || PrefsLoadedState() => const SliverToBoxAdapter(child: SizedBox.shrink()),
       HotelListLoadingState() => const SliverToBoxAdapter(child: LinearProgressIndicator()),
       HotelListLoadedState() => SliverList(
           delegate: SliverChildBuilderDelegate(
