@@ -15,7 +15,7 @@ const String noHotelDescription = 'There is no description of the hotel';
 const String noHotelViewed = 'not a hotel has been viewed yet';
 
 const String guestsCountPrefs = 'guestsCounter';
-const String guestsCounter = 'guests counter';
+const String guestsCounter = 'guests';
 const String maxPricePrefs = 'maxPrice';
 const String maxPrice = 'max price';
 const String minPricePrefs = 'minPrice';
