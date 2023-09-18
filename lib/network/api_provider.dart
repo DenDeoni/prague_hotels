@@ -14,13 +14,8 @@ class ApiProvider {
         },
         body: jsonEncode(queryParams),
       );
-      if (response.statusCode == 200) {
-        var data = json.decode(utf8.decode(response.bodyBytes));
-        return data;
-      } else {
-        var data = json.decode(utf8.decode(response.bodyBytes));
-        return data;
-      }
+      var data = json.decode(utf8.decode(response.bodyBytes));
+      return data;
     } catch (e) {
       throw Exception('EXCEPTION: $e');
     }
