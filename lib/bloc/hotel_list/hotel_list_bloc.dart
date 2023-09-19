@@ -45,10 +45,10 @@ class HotelListBloc extends Bloc<HotelListEvent, HotelListState> {
       ).toJson(),
       endPoint: listEndPoint,
     );
-    PropertySearchModel? answer = AnswerModel.fromJson(response).data;
-    String? message = AnswerModel.fromJson(response).message;
-    if (answer == null && message != null) {
-      throw Exception('EXCEPTION: $message');
+    Map<String, dynamic>? answerData = response['data'];
+    Map<String, dynamic>? answerMessage = response['message'];
+    if (answerData == null && answerMessage != null) {
+      throw Exception('EXCEPTION: $answerMessage');
     }
 
     List<PropertyModel>? listProp = PropertyListModel.fromJson(response['data']['propertySearch']).properties;

@@ -50,39 +50,43 @@ class HotelDetailWidget extends StatelessWidget {
   }
 
   Widget _hotelInfo(HotelDetailLoadedState content) {
-    return Wrap(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              content.hotelDetail.propertyGallery?.images?[0].image != null
-                  ? Image(
-                      image:
-                          CachedNetworkImageProvider(content.hotelDetail.propertyGallery?.images?[0].image?.url ?? ''),
-                      fit: BoxFit.fitWidth,
-                    )
-                  : const Center(
-                      child: Icon(
-                        size: 50,
-                        Icons.image_not_supported_outlined,
-                      ),
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  content.hotelDetail.propertyGallery?.images?[0].image != null
+                      ? Image(
+                          image:
+                              CachedNetworkImageProvider(content.hotelDetail.propertyGallery?.images?[0].image?.url ?? ''),
+                          fit: BoxFit.fitWidth,
+                        )
+                      : const Center(
+                          child: Icon(
+                            size: 50,
+                            Icons.image_not_supported_outlined,
+                          ),
+                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Text(
+                      content.hotelDetail.propertyContentSectionGroups?.aboutThisProperty.sections[0].bodySubSections?[0]
+                              .elements?[0].items?[0].content?.text ??
+                          noHotelDescription,
+                      textAlign: TextAlign.justify,
+                      style: const TextStyle(fontSize: 16),
                     ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  content.hotelDetail.propertyContentSectionGroups?.aboutThisProperty.sections[0].bodySubSections?[0]
-                          .elements?[0].items?[0].content?.text ??
-                      noHotelDescription,
-                  textAlign: TextAlign.justify,
-                  style: const TextStyle(fontSize: 16),
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 

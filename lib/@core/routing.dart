@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:prague_hotels/models/hotel_detail_model.dart';
-import 'package:prague_hotels/models/index.dart';
 import 'package:prague_hotels/pages/hotel_detail_page.dart';
 
 class Routing {
