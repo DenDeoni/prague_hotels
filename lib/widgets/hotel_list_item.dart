@@ -16,8 +16,18 @@ class HotelListItem extends StatelessWidget {
     box.write(hotelId, content?.id!);
   }
 
+  ImageProvider _imageWidget(content) {
+    return content != null
+        ? CachedNetworkImageProvider(content!.propertyImage!.image!.url ?? '')
+        : const CachedNetworkImageProvider(
+            'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg');
+  }
+
   @override
   Widget build(BuildContext context) {
+    String? hotelName = content?.name ?? 'Name of Hotel';
+    String? neighborhood = content?.neighborhood?.name ?? '';
+    String price = content?.price?.displayMessages?[1].lineItems?[0].value ?? '';
     return InkWell(
       onTap: () {
         _saveIdToPrefs();
@@ -37,21 +47,18 @@ class HotelListItem extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Text(
-                        content?.name ?? 'Name of Hotel',
+                        hotelName,
                         style: const TextStyle(fontSize: 22),
                       )),
-                      Text(content?.price?.displayMessages?[1].lineItems?[0].value ?? ''),
+                      Text(price),
                     ],
                   ),
-                  Text(content?.neighborhood?.name ?? '')
+                  Text(neighborhood)
                 ],
               ),
             ),
             Image(
-              image: content != null
-                  ? CachedNetworkImageProvider(content!.propertyImage!.image!.url ?? '')
-                  : const CachedNetworkImageProvider(
-                      'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small/no-image-available-icon-vector.jpg'),
+              image: _imageWidget(content),
               fit: BoxFit.fitWidth,
             ),
           ],
